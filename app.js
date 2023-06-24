@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 //cookie handler
 app.use(cookieParser());
-const uri = "mongodb+srv://anshil:sachurichusachurichu@cluster0.n9dcg.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGO_URL;
 //MongoDB call
 try {
 
