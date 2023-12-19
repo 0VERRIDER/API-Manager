@@ -46,6 +46,8 @@ $ npm run test
 
 Contributions are welcome, feel free to submit a PR. Please make sure that you are using the dev branch as the base.
 
+---
+
 <p align="center">
   Made with ❤️ by 0verrider and NestJS.
 </p>
