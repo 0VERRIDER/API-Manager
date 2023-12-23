@@ -46,5 +46,4 @@ export abstract class User {
 
     @Column({ type: 'varchar', length: 300 })
     lastChangedBy: string;
-
 }
