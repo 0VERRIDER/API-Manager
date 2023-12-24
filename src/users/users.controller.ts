@@ -12,29 +12,28 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<ResponseDataType<User>> {
-    return await this.usersService.create(createUserDto).then(
-      (result) => {
-        if (result) {
-          return {
-            message: USER_STRINGS.USER_CREATED,
-            data: result
-          };
-        } else {
-          const error: ErrorDataType = {
-            statusCode: 404,
-            message: USER_STRINGS.USER_CREATED_ERROR,
-            status: 'error'
-          };
+    const createdUser = await this.usersService.create(createUserDto);
 
-          throw error;
-        }
-      }
-    )
+    if (createdUser) {
+      return {
+        message: USER_STRINGS.USER_CREATED,
+        data: createdUser
+      };
+    } else {
+      const error: ErrorDataType = {
+        statusCode: 404,
+        message: USER_STRINGS.USER_CREATED_ERROR,
+        status: 'error'
+      };
+
+      throw error;
+    }
   }
 
   @Get()
   async findAll(): Promise<ResponseDataType<User[]>> {
     const users = await this.usersService.findAll();
+
     if (users.length > 0) {
       return {
         message: USER_STRINGS.NO_USERS_FOUND,
@@ -54,6 +53,7 @@ export class UsersController {
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<ResponseDataType<User>> {
     const user = await this.usersService.findOne(id);
+
     if (user) {
       return {
         message: USER_STRINGS.USER_FOUND_ID(id),
@@ -73,6 +73,7 @@ export class UsersController {
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<ResponseDataType<User>> {
     const userExists = await this.usersService.findOne(id);
+
     if (!userExists) {
       const error: ErrorDataType = {
         statusCode: 404,
@@ -82,45 +83,45 @@ export class UsersController {
       throw error;
     }
 
-    return await this.usersService.update(id, updateUserDto).then(
-      (result) => {
-        if (result) {
-          return {
-            message: USER_STRINGS.USER_UPDATED,
-            data: result
-          };
-        } else {
-          const error: ErrorDataType = {
-            statusCode: 404,
-            message: USER_STRINGS.USER_UPDATED_ERROR,
-            status: 'error'
-          };
+    const updatedUser = await this.usersService.update(id, updateUserDto);
 
-          throw error;
-        }
-      }
-    );
+    if (updatedUser) {
+      return {
+        message: USER_STRINGS.USER_UPDATED,
+        data: updatedUser
+      };
+    } else {
+      const error: ErrorDataType = {
+        statusCode: 404,
+        message: USER_STRINGS.USER_UPDATED_ERROR,
+        status: 'error'
+      };
+
+      throw error;
+    }
   }
+
 
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<ResponseDataType<string>> {
-    return await this.usersService.remove(id).then(
-      (result) => {
-        if (result.affected > 0) {
-          return {
-            message: USER_STRINGS.USER_DELTED_ID(id),
-            data: id
-          }
-        } else {
-          const error: ErrorDataType = {
-            statusCode: 404,
-            message: USER_STRINGS.USER_DELTED_ERROR_ID(id),
-            status: 'error'
-          };
+    const deletedUser = await this.usersService.remove(id);
 
-          throw error;
+    if (deletedUser) {
+      if (deletedUser.affected > 0) {
+        return {
+          message: USER_STRINGS.USER_DELTED_ID(id),
+          data: id
         }
+      } else {
+        const error: ErrorDataType = {
+          statusCode: 404,
+          message: USER_STRINGS.USER_DELTED_ERROR_ID(id),
+          status: 'error'
+        };
+
+        throw error;
       }
-    )
+    }
+
   }
 }
