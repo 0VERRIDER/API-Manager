@@ -6,6 +6,7 @@ import { UserIdDto } from './dto/user-id.dto';
 import { USER_STRINGS } from '../configs/string.constants';
 import { ErrorDataType, ResponseDataType } from '../types/response.type';
 import { User } from './entities/user.entity';
+import { encryptPassword } from '../functions/password/encrypt-password.function';
 
 @Controller('users')
 export class UsersController {
@@ -13,6 +14,9 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<ResponseDataType<User>> {
+    // Encrypt password
+    createUserDto.password = await encryptPassword(createUserDto.password);
+
     const createdUser = await this.usersService.create(createUserDto);
 
     if (createdUser) {
@@ -37,7 +41,7 @@ export class UsersController {
 
     if (users.length > 0) {
       return {
-        message: USER_STRINGS.NO_USERS_FOUND,
+        message: USER_STRINGS.USERS_FOUND,
         data: users
       };
     } else {
