@@ -11,4 +11,7 @@ export const USER_STRINGS = {
     USER_CREATED_ERROR: 'Error creating user',
     USER_UPDATED: 'User updated',
     USER_UPDATED_ERROR: 'Error updating user',
+    USER_EMAIL_EXISTS: 'Email already exists',
+    USER_EMAIL_NOT_EXISTS: ((email: string) => `Email ${email} does not exist`),
+    USER_EMAIL_FOUND: (email: string) => `User with email ${email} found`,
 }

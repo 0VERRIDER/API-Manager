@@ -21,6 +21,10 @@ export class UsersService {
     return this.usersRepository.findOne({where: {id: id}});
   }
 
+  findOneByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne({where: {email: email}});
+  }
+
   create(createUserDto: CreateUserDto): Promise<User> { 
     const newUser = this.usersRepository.create(createUserDto);
     return this.usersRepository.save(newUser);

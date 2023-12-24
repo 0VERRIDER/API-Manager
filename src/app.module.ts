@@ -5,9 +5,11 @@ import { UsersModule } from './users/users.module';
 import { configService } from './configs/config.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
-    UsersModule, 
+    UsersModule,
+    AuthModule,
     TypeOrmModule.forRoot(configService.getTypeOrmConfig())
   ],
   controllers: [AppController],

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -7,7 +7,9 @@ import { USER_STRINGS } from '../configs/string.constants';
 import { ErrorDataType, ResponseDataType } from '../types/response.type';
 import { User } from './entities/user.entity';
 import { encryptPassword } from '../functions/password/encrypt-password.function';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
@@ -69,6 +71,26 @@ export class UsersController {
       const error: ErrorDataType = {
         statusCode: 404,
         message: USER_STRINGS.NO_USER_ID_FOUND(id),
+        status: 'error'
+      };
+
+      throw error;
+    }
+  }
+
+  @Get('email/:email')
+  async findOneByEmail(@Param('email') email: string): Promise<ResponseDataType<User>> {
+    const user = await this.usersService.findOneByEmail(email);
+
+    if (user) {
+      return {
+        message: USER_STRINGS.USER_EMAIL_FOUND(email),
+        data: user
+      };
+    } else {
+      const error: ErrorDataType = {
+        statusCode: 404,
+        message: USER_STRINGS.USER_EMAIL_NOT_EXISTS(email),
         status: 'error'
       };
 
