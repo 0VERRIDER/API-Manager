@@ -5,7 +5,7 @@ export type ResponseDataType<T> = {
     status?: string;
 };
 
-export type ErrorDataType = {
+export interface ErrorDataType {
     statusCode: number;
     message: string;
     status: string;
