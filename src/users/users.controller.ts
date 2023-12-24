@@ -72,6 +72,16 @@ export class UsersController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<ResponseDataType<User>> {
+    const userExists = await this.usersService.findOne(id);
+    if (!userExists) {
+      const error: ErrorDataType = {
+        statusCode: 404,
+        message: USER_STRINGS.NO_USER_ID_FOUND(id),
+        status: 'error'
+      };
+      throw error;
+    }
+
     return await this.usersService.update(id, updateUserDto).then(
       (result) => {
         if (result) {
@@ -89,7 +99,7 @@ export class UsersController {
           throw error;
         }
       }
-    )
+    );
   }
 
   @Delete(':id')
