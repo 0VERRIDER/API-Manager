@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserIdDto } from './dto/user-id.dto';
 import { USER_STRINGS } from '../configs/string.constants';
 import { ErrorDataType, ResponseDataType } from '../types/response.type';
 import { User } from './entities/user.entity';
@@ -51,7 +52,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<ResponseDataType<User>> {
+  async findOne(@Param() params: UserIdDto): Promise<ResponseDataType<User>> {
+    const id = params.id;
     const user = await this.usersService.findOne(id);
 
     if (user) {
@@ -71,7 +73,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<ResponseDataType<User>> {
+  async update(@Param() params: UserIdDto, @Body() updateUserDto: UpdateUserDto): Promise<ResponseDataType<User>> {
+    const id = params.id;
     const userExists = await this.usersService.findOne(id);
 
     if (!userExists) {
@@ -104,7 +107,8 @@ export class UsersController {
 
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<ResponseDataType<string>> {
+  async remove(@Param() params: UserIdDto): Promise<ResponseDataType<string>> {
+    const id = params.id;
     const deletedUser = await this.usersService.remove(id);
 
     if (deletedUser) {
