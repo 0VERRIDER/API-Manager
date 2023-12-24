@@ -80,6 +80,7 @@ export class UsersController {
         message: USER_STRINGS.NO_USER_ID_FOUND(id),
         status: 'error'
       };
+
       throw error;
     }
 
