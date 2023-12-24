@@ -10,7 +10,7 @@ export class AuthController {
 
     @UseGuards(AuthGuard('local'))
     @Post('login')
-    async login(@Request() req): Promise<ResponseDataType<any>> {
+    async login(@Request() req: any): Promise<ResponseDataType<any>> {
         return {
             message: 'Login successful',
             data: await this.authService.generateAccessToken(req.user)
