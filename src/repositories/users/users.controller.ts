@@ -3,13 +3,13 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserIdDto } from './dto/user-id.dto';
-import { USER_STRINGS } from '../configs/string.constants';
-import { ErrorDataType, ResponseDataType } from '../types/response.type';
+import { USER_STRINGS } from '../../configs/string.constants';
+import { ErrorDataType, ResponseDataType } from '../../configs/types/response.type';
 import { User } from './entities/user.entity';
-import { encryptPassword } from '../functions/password/encrypt-password.function';
+import { encryptPassword } from '../../auth/functions/password/encrypt-password.function';
 import { AuthGuard } from '@nestjs/passport';
 
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt-access-token'))
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }

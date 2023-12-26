@@ -15,3 +15,8 @@ export const USER_STRINGS = {
     USER_EMAIL_NOT_EXISTS: ((email: string) => `Email ${email} does not exist`),
     USER_EMAIL_FOUND: (email: string) => `User with email ${email} found`,
 }
+
+export const AUTH_STRINGS = {
+    INVALID_REFRESH_TOKEN: 'Invalid refresh token',
+    INVALID_ACCESS_TOKEN: 'Invalid access token',
+}
