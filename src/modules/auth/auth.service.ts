@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../repositories/users/users.service';
-import { checkPassword } from 'src/auth/functions/password/check-password.functions';
+import { UsersService } from '../users/users.service';
+import { checkPassword } from '../../common/functions/password/check-password.functions';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
-import { RedisService } from 'src/data/redis/redis.service';
-import { AUTH_STRINGS } from 'src/configs/string.constants';
+import { RedisService } from '../../data/redis/redis.service';
+import { AUTH_STRINGS } from '../../resources/string.constants';
 @Injectable()
 export class AuthService {
     constructor(

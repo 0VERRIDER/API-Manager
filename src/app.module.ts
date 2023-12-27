@@ -1,19 +1,20 @@
-import { Module } from '@nestjs/common';
+import { Module, Post } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './repositories/users/users.module';
-import { configService } from './configs/config.service';
+import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { RedisModule } from './data/redis/redis.module';
+import { PostgresModule } from './data/postgres/postgres.module';
 
 @Module({
   imports: [
     UsersModule,
     AuthModule,
-    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
+    PostgresModule,
     RedisModule,
+    PostgresModule,
   ],
   controllers: [AppController],
   providers: [AppService],

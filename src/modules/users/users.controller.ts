@@ -3,18 +3,22 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserIdDto } from './dto/user-id.dto';
-import { USER_STRINGS } from '../../configs/string.constants';
-import { ErrorDataType, ResponseDataType } from '../../configs/types/response.type';
+import { USER_STRINGS } from '../../resources/string.constants';
+import { ErrorDataType, ResponseDataType } from '../../common/types/response.type';
 import { User } from './entities/user.entity';
-import { encryptPassword } from '../../auth/functions/password/encrypt-password.function';
+import { encryptPassword } from '../../common/functions/password/encrypt-password.function';
 import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { RolesGuard } from '../../common/guards/role.guard';
 
+@UseGuards(RolesGuard)
 @UseGuards(AuthGuard('jwt-access-token'))
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
-
+  
   @Post()
+  @Roles('admin', 'support')
   async create(@Body() createUserDto: CreateUserDto): Promise<ResponseDataType<User>> {
     // Encrypt password
     createUserDto.password = await encryptPassword(createUserDto.password);
@@ -37,7 +41,9 @@ export class UsersController {
     }
   }
 
+  
   @Get()
+  @Roles('admin', 'support')
   async findAll(): Promise<ResponseDataType<User[]>> {
     const users = await this.usersService.findAll();
 
@@ -58,6 +64,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @Roles('admin', 'support')
   async findOne(@Param() params: UserIdDto): Promise<ResponseDataType<User>> {
     const id = params.id;
     const user = await this.usersService.findOne(id);
@@ -79,6 +86,7 @@ export class UsersController {
   }
 
   @Get('email/:email')
+  @Roles('admin', 'support')
   async findOneByEmail(@Param('email') email: string): Promise<ResponseDataType<User>> {
     const user = await this.usersService.findOneByEmail(email);
 
@@ -99,6 +107,7 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @Roles('admin')
   async update(@Param() params: UserIdDto, @Body() updateUserDto: UpdateUserDto): Promise<ResponseDataType<User>> {
     const id = params.id;
     const userExists = await this.usersService.findOne(id);
@@ -133,6 +142,7 @@ export class UsersController {
 
 
   @Delete(':id')
+  @Roles('admin')
   async remove(@Param() params: UserIdDto): Promise<ResponseDataType<string>> {
     const id = params.id;
     const deletedUser = await this.usersService.remove(id);
