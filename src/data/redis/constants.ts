@@ -5,5 +5,5 @@ export const redisConfig = {
     port: parseInt(process.env.REDIS_PORT),
     username: process.env.REDIS_USER,
     password: process.env.REDIS_PASSWORD,
-    enableReadyCheck: Boolean(process.env.REDIS_READY_CHECK),
+    enableReadyCheck: process.env.REDIS_ENABLE_READY_CHECK === 'true',
 }
