@@ -18,6 +18,15 @@ This an API manager with advanced and ever requested features all in one place.
 - [ ] Testing and Mocking
 - [ ] Versioning and more on the way :tada: :tada:
 
+## Tech Stack
+
+- [NestJS](https://nestjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Redis](https://redis.io/)
+- [Passport](http://www.passportjs.org/)
+- [Jest](https://jestjs.io/)
+
 ## Installation
 
 ```
@@ -49,5 +58,5 @@ Contributions are welcome, feel free to submit a PR. Please make sure that you a
 ---
 
 <p align="center">
-  Made with ❤️ by 0verrider and NestJS.
+  Made with ❤️ by 0verrider using NestJS.
 </p>
