@@ -6,9 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-    constructor(private reflector: Reflector, private usersService: UsersService, private jwtService: JwtService) { 
-        console.log('RolesGuard constructor');
-    }
+    constructor(private reflector: Reflector, private usersService: UsersService, private jwtService: JwtService) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const roles = this.reflector.get<string[]>('roles', context.getHandler());
@@ -19,6 +17,10 @@ export class RolesGuard implements CanActivate {
 
         // TODO: FIX THE LOGIC
         const request = context.switchToHttp().getRequest();
+        const authorization = request.headers.authorization;
+        if (!authorization || !authorization.startsWith('x-access-token ')) {
+            return false;
+        }
         const jwt = request.headers.authorization.split(' ')[1];
         const userId = this.jwtService.decode(jwt)['userId'];
 
