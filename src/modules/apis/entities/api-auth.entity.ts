@@ -24,6 +24,6 @@ export abstract class ApiAuth {
     @Column({ type: 'varchar', length: 300, nullable: true })
     password: string;
 
-    @Column({ type: 'datetime', nullable: true })
+    @Column({ type: 'timestamp', nullable: true })
     expiresAt: Date;
 }

@@ -12,7 +12,7 @@ export abstract class Api {
     @Column({ type: 'enum', default: ApiType.REST, enum: ApiType })
     type: ApiType;
 
-    @Column({ type: 'uuid' })
+    @Column({ type: 'uuid', nullable: true })
     userId: string;
 
     @Column({ type: 'uuid', nullable: true })
