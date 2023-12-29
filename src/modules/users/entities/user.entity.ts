@@ -6,7 +6,7 @@ export abstract class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'varchar', length: 300 , unique: true})
+    @Column({ type: 'varchar', length: 300, unique: true})
     username: string;
 
     @Column({ type: 'varchar', length: 300, unique: true })

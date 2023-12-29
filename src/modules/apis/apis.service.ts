@@ -1,26 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateApiDto } from './dto/create-api.dto';
 import { UpdateApiDto } from './dto/update-api.dto';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Api } from './entities/api.entity';
+import { ApiAuth } from './entities/api-auth.entity';
+import { ApiEndpoint } from './entities/api-endpoint.entity';
 @Injectable()
 export class ApisService {
-  create(createApiDto: CreateApiDto) {
-    return 'This action adds a new api';
+  constructor(
+    @InjectRepository(Api) private apisRepository: Repository<Api>,
+    @InjectRepository(ApiAuth) private apiAuthsRepository: Repository<ApiAuth>,
+    @InjectRepository(ApiEndpoint) private apiEndpointsRepository: Repository<ApiEndpoint>,
+  ) { }
+
+  createApi(createApiDto: CreateApiDto) {
+    this.apisRepository.save(createApiDto);
   }
 
-  findAll() {
-    return `This action returns all apis`;
+  createApiAuth(createApiAuthDto: any) {
+    this.apiAuthsRepository.save(createApiAuthDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} api`;
-  }
-
-  update(id: number, updateApiDto: UpdateApiDto) {
-    return `This action updates a #${id} api`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} api`;
+  createApiEndpoint(createApiEndpointDto: any) {
+    this.apiEndpointsRepository.save(createApiEndpointDto);
   }
 }

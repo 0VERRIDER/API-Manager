@@ -48,7 +48,7 @@ export class PostgresTypeORMConfiguration {
 
             autoLoadEntities: true,
 
-            synchronize: false,
+            synchronize: true,
 
             migrationsTableName: 'migration',
 
