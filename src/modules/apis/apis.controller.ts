@@ -27,42 +27,42 @@ export class ApisController {
     return this.apisService.removeApi(id);
   }
 
-  @Post("create/auth/:apiId")
+  @Post(":apiId/create/auth")
   createApiAuth(@Param("apiId") apiId: string, @Body() createApiAuthDto: any) {
     return this.apisService.createApiAuth(createApiAuthDto);
   }
 
-  @Get("auth/:apiId/all")
+  @Get(":apiId/auth/all")
   findAllApiAuth(@Param("apiId") apiId: string) {
     return this.apisService.findAllApiAuth();
   }
 
-  @Get("auth/:apiId/:id")
+  @Get(":apiId/auth/:id")
   findApiAuth(@Param("apiId") apiId: string, @Param("id") id: string) {
     return this.apisService.findApiAuth(id);
   }
 
-  @Patch("auth/:apiId/update/:id")
+  @Patch(":apiId/auth/update/:id")
   updateApiAuth(@Param("apiId") apiId: string, @Param("id") id: string, @Body() updateApiAuthDto: any) {
     return this.apisService.updateApiAuth(id, updateApiAuthDto);
   }
 
-  @Delete("auth/:apiId/delete/:id")
+  @Delete(":apiId/auth/delete/:id")
   removeApiAuth(@Param("apiId") apiId: string, @Param("id") id: string) {
     return this.apisService.removeApiAuth(id);
   }
 
-  @Post("create/endpoint/:apiId")
+  @Post(":apiId/create/endpoint/")
   createApiEndpoint(@Body() createApiEndpointDto: any) {
     return this.apisService.createApiEndpoint(createApiEndpointDto);
   }
 
-  @Get("endpoint/:apiId/all")
+  @Get("endpoint/:apiId/get/all")
   findAllApiEndpoint(@Param("apiId") apiId: string) {
     return this.apisService.findAllApiEndpoint();
   }
 
-  @Get("endpoint/:apiId/:id")
+  @Get("endpoint/:apiId/get/:id")
   findApiEndpoint(@Param("apiId") apiId: string, @Param("id") id: string) {
     return this.apisService.findApiEndpoint(id);
   }
