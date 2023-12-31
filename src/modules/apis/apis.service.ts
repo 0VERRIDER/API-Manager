@@ -22,6 +22,14 @@ export class ApisService {
     return this.apisRepository.find();
   }
 
+  findApi(id: string) {
+    return this.apisRepository.findOne({
+      where: {
+        id
+      }
+    });
+  }
+
   updateApi(id: string, updateApiDto: UpdateApiDto) {
     return this.apisRepository.update(id, updateApiDto);
   }

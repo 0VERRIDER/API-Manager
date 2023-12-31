@@ -1,22 +1,26 @@
-import { IsEnum, IsNotEmpty, IsString, IsUUID } from "class-validator";
-import { ApiEndpointType } from "../entities/api-endpoint-type.enum";
-import { ApiReturnType } from "../entities/api-return-type.enum";
+import { IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID, MinLength, minLength } from "class-validator";
+import { ApiEndpointType } from "../../../common/enums/api-endpoint-type.enum";
+import { ApiReturnType } from "../../../common/enums/api-return-type.enum";
 
 export class CreateApiEndpointDto {
-    @IsUUID()
-    @IsNotEmpty()
-    id: string;
-
     @IsString()
     @IsNotEmpty()
+    @MinLength(3)
     name: string;
 
+    @IsUUID()
+    @IsOptional()
+    apiId: string;
+
     @IsEnum(ApiEndpointType)
+    @IsOptional()
     type: ApiEndpointType;
 
     @IsString()
-    baseUrl: string;
+    @IsOptional()
+    path: string;
 
     @IsEnum(ApiReturnType)
+    @IsOptional()
     returnType: ApiReturnType;
 }

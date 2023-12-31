@@ -1,13 +1,19 @@
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
-import { ApiType } from "./api-type.enum";
+import { ApiAuthType } from "../../../common/enums/api-auth-type.enum";
 
 @Entity()
 export abstract class ApiAuth {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'enum', default: ApiType.REST, enum: ApiType })
-    type: ApiType;
+    @Column({ type: 'uuid', nullable: true })
+    apiId: string;
+
+    @Column({ type: 'enum', default: ApiAuthType.BEARER, enum: ApiAuthType })
+    type: ApiAuthType;
+
+    @Column({ type: 'varchar', length: 300, nullable: true, default: 'Bearer' })
+    bearerName: string;
 
     @Column({ type: 'varchar', length: 300, nullable: true })
     accessToken: string;

@@ -1,29 +1,36 @@
-import { IsDate, IsEnum, IsNotEmpty, IsString, IsUUID } from "class-validator";
-import { ApiType } from "../entities/api-type.enum";
+import { IsDate, IsEnum, IsOptional, IsString, IsUUID } from "class-validator";
+import { ApiAuthType } from "../../../common/enums/api-auth-type.enum";
+export class CreateApiAuthDto {
 
-export class CreateApiEndpointDto {
     @IsUUID()
-    @IsNotEmpty()
-    id: string;
+    @IsOptional()
+    apiId: string;
 
-    @IsEnum(ApiType)
-    type: ApiType;
+    @IsEnum(ApiAuthType)
+    @IsOptional()
+    type: ApiAuthType;
 
     @IsString()
+    @IsOptional()
     accessToken: string;
 
     @IsString()
+    @IsOptional()
     refreshToken: string;
 
     @IsString()
+    @IsOptional()
     redirectUri: string;
 
     @IsString()
+    @IsOptional()
     username: string;
 
     @IsString()
+    @IsOptional()
     password: string;
 
     @IsDate()
+    @IsOptional()
     expiresAt: Date;
 }

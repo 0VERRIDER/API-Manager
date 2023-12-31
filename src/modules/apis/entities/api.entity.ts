@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
-import { ApiType } from "./api-type.enum";
+import { ApiType } from "../../../common/enums/api-type.enum";
 
 @Entity()
 export abstract class Api {
@@ -20,6 +20,12 @@ export abstract class Api {
 
     @Column({ type: 'uuid', nullable: true })
     endpointId: string;
+
+    @Column({ type: 'varchar', length: 300, nullable: true })
+    baseUrl: string;
+
+    @Column({ type: 'varchar', length: 300, nullable: true })
+    description: string;
 
     @Column({ type: 'boolean', default: false })
     isActive: boolean;
