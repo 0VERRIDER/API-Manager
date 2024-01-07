@@ -1,5 +1,5 @@
 import { IsDate, IsEnum, IsOptional, IsString, IsUUID } from "class-validator";
-import { ApiAuthType } from "../../../common/enums/api-auth-type.enum";
+import { ApiAuthType } from "../../../../common/enums/api-auth-type.enum";
 export class CreateApiAuthDto {
 
     @IsUUID()

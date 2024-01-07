@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { RedisModule } from './data/redis/redis.module';
 import { PostgresModule } from './data/postgres/postgres.module';
 import { ApisModule } from './modules/apis/apis.module';
+import { CallersModule } from './modules/callers/callers.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ApisModule } from './modules/apis/apis.module';
     RedisModule,
     PostgresModule,
     ApisModule,
+    CallersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,12 +1,12 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ServiceUnavailableException, NotFoundException, NotAcceptableException } from '@nestjs/common';
 import { ApisService } from './apis.service';
-import { CreateApiDto } from './dto/create-api.dto';
+import { CreateApiDto } from './dto/create/create-api.dto';
 import { API_STRINGS } from 'src/resources/string.constants';
-import { UpdateEndpointApiDto } from './dto/update-endpoint.dto';
-import { CreateApiEndpointDto } from './dto/create-endpoint .dto';
-import { UpdateApiAuthDto } from './dto/update-api-auth.dto';
-import { CreateApiAuthDto } from './dto/create-api-auth.dto';
-import { UpdateApiDto } from './dto/update-api.dto';
+import { UpdateEndpointApiDto } from './dto/update/update-endpoint.dto';
+import { CreateApiEndpointDto } from './dto/create/create-endpoint .dto';
+import { UpdateApiAuthDto } from './dto/update/update-api-auth.dto';
+import { CreateApiAuthDto } from './dto/create/create-api-auth.dto';
+import { UpdateApiDto } from './dto/update/update-api.dto';
 
 
 @Controller('api')

@@ -15,5 +15,6 @@ import { ApiEndpoint } from './entities/api-endpoint.entity';
   ],
   controllers: [ApisController],
   providers: [ApisService],
+  exports: [ApisService],
 })
 export class ApisModule {}

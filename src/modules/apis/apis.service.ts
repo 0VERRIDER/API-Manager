@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateApiDto } from './dto/create-api.dto';
-import { UpdateApiDto } from './dto/update-api.dto';
+import { CreateApiDto } from './dto/create/create-api.dto';
+import { UpdateApiDto } from './dto/update/update-api.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Api } from './entities/api.entity';
@@ -30,6 +30,14 @@ export class ApisService {
     });
   }
 
+  findApiByName(name: string) {
+    return this.apisRepository.findOne({
+      where: {
+        name
+      }
+    });
+  }
+
   updateApi(id: string, updateApiDto: UpdateApiDto) {
     return this.apisRepository.update(id, updateApiDto);
   }
@@ -54,6 +62,22 @@ export class ApisService {
     });
   }
 
+  findApiAuthByApiId(apiId: string) {
+    return this.apiAuthsRepository.findOne({
+      where: {
+        apiId
+      }
+    });
+  }
+
+  findApiAuthByName(name: string) {
+    return this.apiAuthsRepository.findOne({
+      where: {
+        name
+      }
+    });
+  }
+
   updateApiAuth(id: string, updateApiAuthDto: any) {
     return this.apiAuthsRepository.update(id, updateApiAuthDto);
   }
@@ -74,6 +98,15 @@ export class ApisService {
     return this.apiEndpointsRepository.findOne({
       where: {
         id
+      }
+    });
+  }
+
+  findApiEndpointByName(apiId:string, name: string) {
+    return this.apiEndpointsRepository.findOne({
+      where: {
+        name,
+        apiId
       }
     });
   }

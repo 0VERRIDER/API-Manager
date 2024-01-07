@@ -6,6 +6,9 @@ export abstract class ApiAuth {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @Column({ type: 'varchar', length: 300, nullable: true})
+    name: string;
+
     @Column({ type: 'uuid', nullable: true })
     apiId: string;
 

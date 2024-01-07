@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID, MinLength, minLength } from "class-validator";
-import { ApiEndpointType } from "../../../common/enums/api-endpoint-type.enum";
-import { ApiReturnType } from "../../../common/enums/api-return-type.enum";
+import { ApiEndpointType } from "../../../../common/enums/api-endpoint-type.enum";
+import { ApiReturnType } from "../../../../common/enums/api-return-type.enum";
 
 export class CreateApiEndpointDto {
     @IsString()
