@@ -14,9 +14,10 @@ export class CallersService {
     const api = await this.apisService.findApiByName(apiName);
     const endpoint = await this.apisService.findApiEndpointByName(api.id, endpointName);
     const apiAuth = await this.apisService.findApiAuthByApiId(api.id);
-
+    const url = `${api.baseUrl}${endpoint.path}`;
     return {
       api,
+      apiUrl: url,
       endpoint,
       auth: apiAuth,
     }
@@ -26,12 +27,7 @@ export class CallersService {
     const requestedServiceData = await this.getRequestedServiceUrl(apiName, endpointName, body);
     return {
       message: "Data retrieved successfully",
-      data: {
-        apiName,
-        endpointName,
-        body,
-        requestedServiceData,
-      }
+      data: requestedServiceData,
     };
   }
 
